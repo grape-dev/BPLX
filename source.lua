@@ -20,11 +20,17 @@ local Window = Rayfield:CreateWindow({
        Subtitle = "Key-System",
        Note = "If you obtained the script via LX staff, you will have a key.",
        FileName = "BPLX_KEY", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-       SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
        GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
        Key = {"BPLX"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
     }
  })
+
+-- Variables
+local Player = game.Players.LocalPlayer
+local ScriptVer = "Ver 1.0 [ALPHA]"
+
+warn("Welcome,".. Player.Name " To BPLX".. ScriptVer)
 
  -- Functions
  local function KillAll()
@@ -38,15 +44,15 @@ end
 --// Tabs
  local MainTab = Window:CreateTab("Main", 15403180857) -- Title, Image
  local AutoTab = Window:CreateTab("Autofarm", 15403012566) -- Title, Image
- local MiscTab = Window:CreateTab("Tab Example", 15402958715) -- Title, Image
- local SetTab = Window:CreateTab("Tab Example", 15402995645) -- Title, Image
+ local MiscTab = Window:CreateTab("Miscellaneous", 15402958715) -- Title, Image
+ local SetTab = Window:CreateTab("Settings", 15402995645) -- Title, Image
 
  -- Sections
  local WelcomeSection = MainTab:CreateSection("Welcome Section")
  local MainAutoFarmSection = AutoTab:CreateSection("Main Autofarm Functions")
 
  -- Buttons
- local Button = MainAutoFarmSection:CreateButton({
+ local KIllAllButton = AutoTab:CreateButton({
 	Name = "Kill All [LOOP]",
 	Callback = function()
         while true do
@@ -56,5 +62,27 @@ end
 	end,
 })
 
+local UnTradeBanButton = MiscTab:CreateButton({
+    Name = "Un-TradeBan All [LOOP]",
+    Callback = function()
+        while true do
+            local args = {
+                [1] = 42,
+                [2] = true
+            }
+            
+            game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+            wait(0.001)
+        end
+    end,
+})
+
+local UncTestButton = SetTab:CreateButton({
+	Name = "UNC TEST [PRESS F9 TO CHECK]",
+	Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/unified-naming-convention/NamingStandard/main/UNCCheckEnv.lua'))()
+	end,
+})
+
  -- Paragrahs
- local Paragraph = WelcomeSection:CreateParagraph({Title = "Welcome To B-P-L-X", Content = "Welcome to the most powerful Breaking-Point script known, the script was crafted by gsc with support via wrig, we hope you enjoy BPLX, and have a great time cheating!"})
+ local Paragraph = MainTab:CreateParagraph({Title = "Welcome To B-P-L-X", Content = "Welcome to the most powerful Breaking-Point script known, the script was crafted by gsc with support via wrig, we hope you enjoy BPLX, and have a great time cheating!"})
