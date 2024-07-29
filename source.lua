@@ -26,11 +26,23 @@ local Window = Rayfield:CreateWindow({
     }
  })
 
--- Variables
+ -- Variables
 local Player = game.Players.LocalPlayer
-local ScriptVer = "Ver 1.0 [ALPHA]"
+local ScriptVer = "1.0 [ALPHA]"
 
-warn("Welcome,".. Player.Name " To BPLX".. ScriptVer)
+Rayfield:Notify({
+    Title = "[MESSAGE FROM BPLX]",
+    Content = "Welcome, ".. Player.Name ..", to BPLX VERSION: ".. ScriptVer,
+    Duration = 6.5,
+    Image = 4483362458,
+    Actions = {
+       Ignore = {
+          Name = "Alright!",
+          Callback = function()
+       end
+    },
+ },
+ })
 
  -- Functions
  local function KillAll()
@@ -72,6 +84,19 @@ local UnTradeBanButton = MiscTab:CreateButton({
             }
             
             game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+            wait(0.001)
+        end
+    end,
+})
+local KysButton = MiscTab:CreateButton({
+    Name = "Suicide [LOOP]",
+    Callback = function()
+        while true do
+            for i,v in pairs(game.Players:GetPlayers()) do
+                if v.Name == game.Players.LocalPlayer.Name then
+                    game:GetService("ReplicatedStorage").RemoteEvent:FireServer(30, v)
+                end
+            end
             wait(0.001)
         end
     end,
