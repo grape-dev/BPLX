@@ -102,6 +102,26 @@ local KysButton = MiscTab:CreateButton({
     end,
 })
 
+local fButton = MiscTab:CreateButton({
+    Name = "FULL-BRIGHTNESS [LIGHTING]",
+    Callback = function()
+        game.Lighting.FogEnd = 100000
+        game.Lighting.FogStart = 0
+        game.Lighting.ClockTime = 14
+        game.Lighting.Brightness = 5
+        game.Lighting.GlobalShadows = true
+        game.Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+    end,
+})
+local dButton = MiscTab:CreateButton({
+    Name = "NORMAL-BRIGHTNESS [LIGHTING]",
+    Callback = function()
+        game.Lighting.Ambient = Color3.fromRGB(0,0,0)
+        game.Lighting.FogEnd = 150
+        game.Lighting.Brightness = 0
+    end,
+})
+
 local UncTestButton = SetTab:CreateButton({
 	Name = "UNC TEST [PRESS F9 TO CHECK]",
 	Callback = function()
